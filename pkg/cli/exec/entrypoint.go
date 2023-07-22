@@ -2,8 +2,9 @@ package exec
 
 import (
 	"errors"
-	"log"
 	"os"
+
+	"github.com/rs/zerolog/log"
 
 	"github.com/restechnica/x/pkg/cli"
 	"github.com/restechnica/x/pkg/cli/commands"
@@ -15,7 +16,7 @@ func Run() (err error) {
 
 	if err = command.Execute(); err != nil {
 		if errors.As(err, &cli.CommandError{}) {
-			log.Fatal(err)
+			log.Error().Err(err).Msg("")
 		}
 
 		os.Exit(1)
