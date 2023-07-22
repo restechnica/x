@@ -11,7 +11,7 @@ import (
 // Returns the new spf13/cobra command.
 func NewRootCommand() *cobra.Command {
 	var command = &cobra.Command{
-		Use:               "sbot",
+		Use:               "x",
 		PersistentPreRunE: RootCommandPersistentPreRunE,
 	}
 
