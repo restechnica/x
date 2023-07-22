@@ -1,11 +1,19 @@
 package commands
 
 import (
+	"os"
+
+	"github.com/rs/zerolog"
+	"github.com/rs/zerolog/log"
 	"github.com/spf13/cobra"
 
 	"github.com/restechnica/x/pkg/cli"
 	"github.com/restechnica/x/pkg/cli/commands/v1"
 )
+
+func init() {
+	log.Logger = log.Output(zerolog.ConsoleWriter{Out: os.Stderr, TimeFormat: "15:04:05"})
+}
 
 // NewRootCommand creates a new root command.
 // Returns the new spf13/cobra command.
@@ -31,5 +39,23 @@ func RootCommandPersistentPreRunE(cmd *cobra.Command, args []string) (err error)
 	cmd.SilenceErrors = true
 	cmd.SilenceUsage = true
 
+	ConfigureLogging()
+
 	return err
+}
+
+func ConfigureLogging() {
+	SetLogLevel()
+}
+
+func SetLogLevel() {
+	zerolog.SetGlobalLevel(zerolog.ErrorLevel)
+
+	if cli.VerboseFlag {
+		zerolog.SetGlobalLevel(zerolog.InfoLevel)
+	}
+
+	if cli.DebugFlag {
+		zerolog.SetGlobalLevel(zerolog.DebugLevel)
+	}
 }
