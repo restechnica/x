@@ -9,7 +9,7 @@ import (
 func NewV1Command() *cobra.Command {
 	var command = &cobra.Command{
 		Use:   "v1",
-		Short: "v1 sbot API",
+		Short: "v1 x API",
 	}
 
 	command.AddCommand(NewGetCommand())
