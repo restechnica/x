@@ -42,6 +42,8 @@ func RootCommandPersistentPreRunE(cmd *cobra.Command, args []string) (err error)
 
 	ConfigureLogging()
 
+	log.Debug().Str("command", "root").Msg("starting pre-run...")
+
 	return err
 }
 
